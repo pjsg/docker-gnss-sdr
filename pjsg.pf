@@ -1,0 +1,57 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index a4ff3cd..efe4cb2 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -386,11 +386,11 @@ if(NOT VOLK_GNSSSDR_FOUND)
+          BUILD_COMMAND ${VOLK_GNSSSDR_BUILD_COMMAND} volk_gnsssdr_profile
+          INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/volk_gnsssdr_module/install
+          )
+-    find_package(ORC)
+-    if(NOT ORC_FOUND)
++    #find_package(ORC)
++    #if(NOT ORC_FOUND)
+          set(ORC_LIBRARIES "")
+          set(ORC_INCLUDE_DIRS "")
+-    endif(NOT ORC_FOUND)
++    #endif(NOT ORC_FOUND)
+         
+     add_library(volk_gnsssdr UNKNOWN IMPORTED)
+     set_property(TARGET volk_gnsssdr PROPERTY IMPORTED_LOCATION ${CMAKE_CURRENT_BINARY_DIR}/volk_gnsssdr_module/install/lib/libvolk_gnsssdr.a)
+diff --git a/src/algorithms/libs/volk_gnsssdr_module/volk_gnsssdr/lib/CMakeLists.txt b/src/algorithms/libs/volk_gnsssdr_module/volk_gnsssdr/lib/CMakeLists.txt
+index 78aa9c1..3ab55ad 100644
+--- a/src/algorithms/libs/volk_gnsssdr_module/volk_gnsssdr/lib/CMakeLists.txt
++++ b/src/algorithms/libs/volk_gnsssdr_module/volk_gnsssdr/lib/CMakeLists.txt
+@@ -240,10 +240,10 @@ endif(NOT CPU_IS_x86)
+ # implement overruling in the ORC case,
+ # since ORC always passes flag detection
+ ########################################################################
+-find_package(ORC)
+-if(NOT ORC_FOUND)
++#find_package(ORC)
++#if(NOT ORC_FOUND)
+     OVERRULE_ARCH(orc "ORC support not found")
+-endif()
++#endif()
+ 
+ ########################################################################
+ # implement overruling in the non-multilib case
+diff --git a/src/main/CMakeLists.txt b/src/main/CMakeLists.txt
+index e21b329..828764f 100644
+--- a/src/main/CMakeLists.txt
++++ b/src/main/CMakeLists.txt
+@@ -74,7 +74,7 @@ target_link_libraries(gnss-sdr ${MAC_LIBRARIES}
+                                ${GFlags_LIBS} 
+                                ${GLOG_LIBRARIES} 
+                                ${ARMADILLO_LIBRARIES} 
+-                               ${VOLK_GNSSSDR_LIBRARIES} ${ORC_LIBRARIES}
++                               ${VOLK_GNSSSDR_LIBRARIES} 
+                                ${GNSS_SDR_OPTIONAL_LIBS}
+                                gnss_sp_libs 
+                                gnss_rx
+@@ -119,4 +119,4 @@ if(NOT GZIP_NOTFOUND)
+ 
+          install(FILES ${CMAKE_BINARY_DIR}/volk_gnsssdr_profile.1.gz DESTINATION share/man/man1)
+      endif(NOT VOLK_GNSSSDR_FOUND)
+-endif(NOT GZIP_NOTFOUND)
+\ No newline at end of file
++endif(NOT GZIP_NOTFOUND)
