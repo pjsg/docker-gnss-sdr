@@ -18,7 +18,7 @@ WORKDIR /gnuradio
 
 RUN axel http://www.sbrac.org/files/build-gnuradio && chmod a+x ./build-gnuradio && printf "y\ny\ny\ny\n" | ./build-gnuradio -ja
 RUN echo "export PYTHONPATH=/usr/local/lib/python2.7/dist-packages" > ~/.bashrc
-ADD pjsg.pf /gnuradio
+ADD pjsg.pf /gnuradio/
 RUN git clone git://git.code.sf.net/p/gnss-sdr/cttc gnss-sdr && cd gnss-sdr && git checkout next && patch -p1 < ../pjsg.pf && cd build && cmake ../ && make && make install
 
 ENTRYPOINT      ["/bin/bash"]
